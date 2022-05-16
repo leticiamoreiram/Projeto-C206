@@ -1,2 +1,2 @@
-public class Restaurante {
+public abstract class Restaurante {
 }
