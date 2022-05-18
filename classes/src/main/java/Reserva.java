@@ -1,4 +1,4 @@
-public class Reserva extends Restaurante {
+public abstract class Reserva {
 
 
 
