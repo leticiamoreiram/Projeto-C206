@@ -7,8 +7,8 @@ public class Cliente {
     private String telefone;
     private String email;
 
-    public Cliente() {;
-    }
+    public Cliente() {
+    };
 
     public String getNome() {
         return nome;

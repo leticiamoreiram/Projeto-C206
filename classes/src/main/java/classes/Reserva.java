@@ -3,6 +3,7 @@ package classes;
 public abstract class Reserva {
 
     public int qtdPessoas;
+    public int numReserva;
 
     public Reserva(int qtdPessoas) {
         this.qtdPessoas = qtdPessoas;
