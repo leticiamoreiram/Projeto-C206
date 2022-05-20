@@ -1,3 +1,5 @@
+package classes;
+
 public class RerservaJantar extends Reserva{
 
     private float precoJantar;

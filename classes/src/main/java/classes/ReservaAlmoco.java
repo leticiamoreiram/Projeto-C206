@@ -1,3 +1,5 @@
+package classes;
+
 public class ReservaAlmoco extends Reserva{
 
     private float precoAlmoco;
