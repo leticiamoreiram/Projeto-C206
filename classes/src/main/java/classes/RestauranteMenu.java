@@ -36,15 +36,13 @@ public enum RestauranteMenu {;
         Scanner input = new Scanner(System.in);
         while(true) {
             System.out.println("Welcome to the Hotel Reservation Application");
-            System.out.println("--------------------------------------------");
             RestauranteMenu.mostraOpcao();
-            System.out.println("--------------------------------------------");
             System.out.println("Please select a number for the menu option");
             int id = input.nextInt();
             RestauranteMenu mainMenuOption = RestauranteMenu.getOption(id);
             if(mainMenuOption != null)
                 return mainMenuOption;
-            System.out.println("Error: Invalid Input");
+            System.out.println("Entrada inválida");
         }
     }
 
