@@ -12,20 +12,18 @@ public enum RestauranteMenu {;
     private static final Map<Integer, RestauranteMenu> map = new HashMap<>();
 
     RestauranteMenu(int id, String legenda){
-
         this.id = id;
         this.legenda = legenda;
+    }
 
+    public int getId() {
+        return id;
     }
 
     static {
         for(RestauranteMenu restauranteMenu: RestauranteMenu.values()) {
             map.put(restauranteMenu.id, restauranteMenu);
         }
-    }
-
-    public int getId() {
-        return id;
     }
 
     public static RestauranteMenu getOption(int id) {
