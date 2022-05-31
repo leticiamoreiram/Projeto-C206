@@ -12,12 +12,11 @@ public class RestauranteMenu {
         System.out.println("__________________________________________");
         while (flag){
             System.out.println("** Menu: **");
-            System.out.println("1- Reservar Almoço");
-            System.out.println("2- Reservar Jantar");
-            System.out.println("3- Mostrar mesas disponiveis");
-            System.out.println("4- Ver minha reserva");
-            System.out.println("5- Cancelar reserva");
-            System.out.println("6- Sair");
+            System.out.println("1- Cadastro");
+            System.out.println("2- Fazer reserva");
+            System.out.println("3- Ver minha reserva");
+            System.out.println("4- Cancelar reserva");
+            System.out.println("5- Sair");
             int op = sc.nextInt();
 
             switch (op){
@@ -34,9 +33,6 @@ public class RestauranteMenu {
 
                     break;
                 case 5:
-
-                    break;
-                case 6:
                     System.out.println("Obrigado por visitar o restaurante");
                     flag = false;
                     break;

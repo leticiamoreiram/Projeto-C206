@@ -13,7 +13,7 @@ public class Database {
 
     static final String user = "root";                  // usuário da instância local do servidor
     static final String password = "root";    // senha do usuário da instância local do servidor
-    static final String database = "model";           // nome do banco de dados a ser utilizado
+    static final String database = "db";           // nome do banco de dados a ser utilizado
 
     // string com URL de conexão com servidor
     static final String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
@@ -37,7 +37,7 @@ public class Database {
             pst = connection.prepareStatement(sql);
             pst.setString(1, cliente.getNome());      // concatena nome na primeira ? do comando
             pst.setString(2, cliente.getEmail());        // concatena nome na segunda ? do comando
-            pst.setString(3, cliente.getTelefone());        // concatena nome na terceira ? do comando
+            //pst.setString(3, cliente.getTelefone());        // concatena nome na terceira ? do comando
             pst.setString(4, cliente.getCpf());        // concatena nome na quarta ? do comando
             pst.execute();                           // executa o comando
             check = true;
@@ -69,13 +69,13 @@ public class Database {
             while(result.next()){
                 Cliente clienteTemp = new Cliente();
                 clienteTemp.setCpf(result.getString("cpf"));
-                clienteTemp.setTelefone(result.getString("telefone"));
+                //clienteTemp.setTelefone(result.getString("telefone"));
                 clienteTemp.setEmail(result.getString("email"));
                 clienteTemp.setNome(result.getString("nome"));
 
                 System.out.println("ID = " + clienteTemp.getNome());
                 System.out.println("Nome = " + clienteTemp.getEmail());
-                System.out.println("CPF = " + clienteTemp.getTelefone());
+               // System.out.println("CPF = " + clienteTemp.getTelefone());
                 System.out.println("CPF = " + clienteTemp.getCpf());
                 System.out.println("------------------------------");
 
@@ -105,7 +105,7 @@ public class Database {
             pst = connection.prepareStatement(sql);
             pst.setString(1, cliente.getNome());
             pst.setString(2, cliente.getEmail());
-            pst.setString(3, cliente.getTelefone());
+          //  pst.setString(3, cliente.getTelefone());
             pst.setString(4, cpf);
             pst.execute();
             check = true;
