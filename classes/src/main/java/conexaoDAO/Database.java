@@ -1,5 +1,7 @@
 package conexaoDAO;
 
+import classes.Cliente;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,8 +12,8 @@ public class Database {
     PreparedStatement pst;   // objeto responsável por preparar querys de manipulação dinâmicas (INSERT, UPDATE, DELETE)
 
     static final String user = "root";                  // usuário da instância local do servidor
-    static final String password = "/MS-DOSV.6.22b";    // senha do usuário da instância local do servidor
-    static final String database = "projeto";           // nome do banco de dados a ser utilizado
+    static final String password = "root";    // senha do usuário da instância local do servidor
+    static final String database = "model";           // nome do banco de dados a ser utilizado
 
     // string com URL de conexão com servidor
     static final String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
@@ -27,14 +29,16 @@ public class Database {
     }
 
     // ----------------------------INSERINDO NOVO REGISTRO----------------------------
-    public boolean insertUser(User user){
+    public boolean inserirCliente(Cliente cliente){
         connect();
-        String sql = "INSERT INTO usuario(nome, cpf) VALUES(?, ?)";
+        String sql = "INSERT INTO usuario(nome, cpf, telefone, email) VALUES(?, ?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setString(1, user.getNome());      // concatena nome na primeira ? do comando
-            pst.setString(2,user.getCpf());        // concatena nome na segunda ? do comando
+            pst.setString(1, cliente.getNome());      // concatena nome na primeira ? do comando
+            pst.setString(2, cliente.getCpf());        // concatena nome na segunda ? do comando
+            pst.setString(3, cliente.getTelefone());        // concatena nome na terceira ? do comando
+            pst.setString(4, cliente.getEmail());        // concatena nome na quarta ? do comando
             pst.execute();                           // executa o comando
             check = true;
 

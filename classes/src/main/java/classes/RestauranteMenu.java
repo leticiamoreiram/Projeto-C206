@@ -1,9 +1,6 @@
 package classes;
 
 import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class RestauranteMenu {
     public static void main(String[] args) {
