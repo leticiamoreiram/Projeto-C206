@@ -8,7 +8,8 @@ public class RestauranteMenu {
     Scanner sc = new Scanner(System.in);
     boolean flag = true;
 
-        System.out.println("**Bem-vindo ao restaurante**");
+        System.out.println("******  Bem-vindo ao restaurante    ******");
+        System.out.println("__________________________________________");
         while (flag){
             System.out.println("** Menu: **");
             System.out.println("1- Reservar Almoço");
