@@ -31,14 +31,14 @@ public class Database {
     // ----------------------------INSERINDO NOVO REGISTRO----------------------------
     public boolean inserirCliente(Cliente cliente){
         connect();
-        String sql = "INSERT INTO usuario(nome, cpf, telefone, email) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO Cliente(nome, email, telefone, cpf ) VALUES(?, ?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
             pst.setString(1, cliente.getNome());      // concatena nome na primeira ? do comando
-            pst.setString(2, cliente.getCpf());        // concatena nome na segunda ? do comando
+            pst.setString(2, cliente.getEmail());        // concatena nome na segunda ? do comando
             pst.setString(3, cliente.getTelefone());        // concatena nome na terceira ? do comando
-            pst.setString(4, cliente.getEmail());        // concatena nome na quarta ? do comando
+            pst.setString(4, cliente.getCpf());        // concatena nome na quarta ? do comando
             pst.execute();                           // executa o comando
             check = true;
 
@@ -58,25 +58,33 @@ public class Database {
     }
 
     // ----------------------------BUSCANDO TODOS REGISTROS----------------------------
-    public ArrayList<User> researchUser(){
+    public ArrayList<Cliente> buscarCliente(){
         connect();
-        ArrayList<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM usuario";
+        ArrayList<Cliente> listaClientes = new ArrayList<>();
+        String sql = "SELECT * FROM Cliente";
         try{
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
 
             while(result.next()){
-                User userTemp = new User(result.getString("nome"), result.getString("cpf"));
-                userTemp.id = result.getInt("id");
-                System.out.println("ID = " + userTemp.id);
-                System.out.println("Nome = " + userTemp.getNome());
-                System.out.println("CPF = " + userTemp.getCpf());
+                Cliente clienteTemp = new Cliente();
+                clienteTemp.setCpf(result.getString("cpf"));
+                clienteTemp.setTelefone(result.getString("telefone"));
+                clienteTemp.setEmail(result.getString("email"));
+                clienteTemp.setNome(result.getString("nome"));
+
+                System.out.println("ID = " + clienteTemp.getNome());
+                System.out.println("Nome = " + clienteTemp.getEmail());
+                System.out.println("CPF = " + clienteTemp.getTelefone());
+                System.out.println("CPF = " + clienteTemp.getCpf());
                 System.out.println("------------------------------");
-                users.add(userTemp);
+
+                listaClientes.add(clienteTemp);
             }
+            check = true;
         }catch (SQLException e){
             System.out.println("Erro de operação: " + e.getMessage());
+            check = false;
         }finally {
             try {
                 connection.close();
@@ -86,17 +94,19 @@ public class Database {
                 System.out.println("Erro ao fechar a conexão: " + e.getMessage());
             }
         }
-        return users;
+        return listaClientes;
     }
 
     // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
-    public boolean updateUser(int id, String nome){
+    public boolean atualizarCliente(String cpf, Cliente cliente){
         connect();
-        String sql = "UPDATE usuario SET nome=? WHERE id=?";
+        String sql = "UPDATE Cliente SET nome=?, email=?, telefone=? WHERE cpf=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setString(1, nome);
-            pst.setInt(2, id);
+            pst.setString(1, cliente.getNome());
+            pst.setString(2, cliente.getEmail());
+            pst.setString(3, cliente.getTelefone());
+            pst.setString(4, cpf);
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -114,12 +124,12 @@ public class Database {
     }
 
     // ----------------------------EXCLUINDO REGISTRO----------------------------
-    public boolean deleteUser(int id) {
+    public boolean deletarCliente(String cpf) {
         connect();
-        String sql = "DELETE FROM usuario WHERE id=?";
+        String sql = "DELETE FROM Cliente where cpf=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, id);
+            pst.setString(1, cpf);
             pst.execute();
             check = true;
         }catch (SQLException e){
