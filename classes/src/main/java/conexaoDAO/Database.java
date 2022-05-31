@@ -1,9 +1,6 @@
 package conexaoDAO;
 
-import classes.Cliente;
-
 import java.sql.*;
-import java.util.ArrayList;
 
 public abstract class Database {
     Connection connection;   // objeto responsável por fazer a conexão com o servidor do MySQL
@@ -17,7 +14,7 @@ public abstract class Database {
 
     // string com URL de conexão com servidor
     static final String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
-    private boolean check = false;
+    public boolean check = false;
 
     public void connect(){
         try {
@@ -27,6 +24,5 @@ public abstract class Database {
             System.out.println("Erro de conexão: " + e.getMessage());
         }
     }
-
 
 }

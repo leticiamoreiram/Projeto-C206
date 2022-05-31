@@ -10,14 +10,13 @@ public class ClienteDB extends Database {
     // ----------------------------INSERINDO NOVO REGISTRO----------------------------
     public boolean inserirCliente(Cliente cliente){
         connect();
-        String sql = "INSERT INTO Cliente(nome, email, telefone, cpf ) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO Cliente(nome, email, cpfCliente) VALUES(?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
             pst.setString(1, cliente.getNome());      // concatena nome na primeira ? do comando
             pst.setString(2, cliente.getEmail());        // concatena nome na segunda ? do comando
-            //pst.setString(3, cliente.getTelefone());        // concatena nome na terceira ? do comando
-            pst.setString(4, cliente.getCpf());        // concatena nome na quarta ? do comando
+            pst.setString(3, cliente.getCpfCliente());        // concatena nome na terceira ? do comando
             pst.execute();                           // executa o comando
             check = true;
 
@@ -47,20 +46,19 @@ public class ClienteDB extends Database {
 
             while(result.next()){
                 Cliente clienteTemp = new Cliente();
-                clienteTemp.setCpf(result.getString("cpf"));
-                //clienteTemp.setTelefone(result.getString("telefone"));
-                clienteTemp.setEmail(result.getString("email"));
                 clienteTemp.setNome(result.getString("nome"));
+                clienteTemp.setEmail(result.getString("email"));
+                clienteTemp.setCpfCliente(result.getString("cpf"));
 
-                System.out.println("ID = " + clienteTemp.getNome());
-                System.out.println("Nome = " + clienteTemp.getEmail());
-                // System.out.println("CPF = " + clienteTemp.getTelefone());
-                System.out.println("CPF = " + clienteTemp.getCpf());
+
+                System.out.println("NOME = " + clienteTemp.getNome());
+                System.out.println("EMAIL = " + clienteTemp.getEmail());
+                System.out.println("CPF = " + clienteTemp.getCpfCliente());
                 System.out.println("------------------------------");
 
                 listaClientes.add(clienteTemp);
             }
-            check = true;
+
         }catch (SQLException e){
             System.out.println("Erro de operação: " + e.getMessage());
             check = false;

@@ -5,7 +5,6 @@ public class Cliente {
     private String nome;
     private String email;
     private String cpfCliente;
-    //private static String cpfGlobal;
 
     public String getNome() {
         return nome;
@@ -23,20 +22,12 @@ public class Cliente {
         this.email = email;
     }
 
-    public String getCpf() {
+    public String getCpfCliente() {
         return cpfCliente;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpfCliente(String cpf) {
         this.cpfCliente = cpf;
     }
-/*
-    public static String getCpfGlobal() {
-        return cpfGlobal;
-    }
 
-    public static void setCpfGlobal(String cpfGlobal) {
-        Cliente.cpfGlobal = cpfGlobal;
-    }
- */
 }
