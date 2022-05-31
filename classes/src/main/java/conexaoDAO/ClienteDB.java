@@ -77,13 +77,12 @@ public class ClienteDB extends Database {
     // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
     public boolean atualizarCliente(String cpf, Cliente cliente){
         connect();
-        String sql = "UPDATE Cliente SET nome=?, email=?, telefone=? WHERE cpf=?";
+        String sql = "UPDATE Cliente SET nome=?, email=? WHERE cpf=?";
         try{
             pst = connection.prepareStatement(sql);
             pst.setString(1, cliente.getNome());
             pst.setString(2, cliente.getEmail());
-            //  pst.setString(3, cliente.getTelefone());
-            pst.setString(4, cpf);
+            pst.setString(3, cliente.getCpfCliente());
             pst.execute();
             check = true;
         }catch (SQLException e){
