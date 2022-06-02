@@ -1,9 +1,17 @@
 package classes;
 
+import conexaoDAO.ClienteDB;
+import conexaoDAO.MesaDB;
+import conexaoDAO.ReservaDB;
+
 import java.util.Scanner;
 
 public class RestauranteMenu {
     public static void main(String[] args) {
+
+    ClienteDB clienteDB = new ClienteDB();
+    ReservaDB reservaDB = new ReservaDB();
+    MesaDB mesaDB = new MesaDB();
 
     Scanner sc = new Scanner(System.in);
     boolean flag = true;
