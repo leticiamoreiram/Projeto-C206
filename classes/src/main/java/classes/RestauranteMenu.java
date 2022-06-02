@@ -16,7 +16,7 @@ public class RestauranteMenu {
     Scanner sc = new Scanner(System.in);
     boolean flag = true;
 
-        System.out.println("******  Bem-vindo ao restaurante    ******");
+        System.out.println("******  Bem-vindo ao Restaurante    ******");
         System.out.println("__________________________________________");
         while (flag){
             System.out.println("** Menu: **");
@@ -25,6 +25,9 @@ public class RestauranteMenu {
             System.out.println("3- Ver reservas");
             System.out.println("4- Cancelar reserva");
             System.out.println("5- Sair");
+            System.out.println("_______________________");
+            System.out.println(" ");
+            System.out.println("Sua opção: ");
 
             int op = sc.nextInt();
 
@@ -67,7 +70,7 @@ public class RestauranteMenu {
                     break;
                 case 3:
 
-                    reservaDB.buscarReserva();
+                    clienteDB.buscarCliente();
                     break;
                 case 4:
 
@@ -76,7 +79,7 @@ public class RestauranteMenu {
 
                     break;
                 case 5:
-                    System.out.println("Obrigado por visitar o restaurante");
+                    System.out.println("Volte Sempre!");
                     flag = false;
                     break;
                 default:
