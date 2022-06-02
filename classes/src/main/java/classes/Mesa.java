@@ -3,9 +3,9 @@ package classes;
 public class Mesa {
 
     private int numMesa;
-    private int preco;
+    private double preco = 38.5; // valor por pessoa
 
-    public int getNumMesa() {
+     public int getNumMesa() {
         return numMesa;
     }
 
@@ -13,11 +13,11 @@ public class Mesa {
         this.numMesa = numMesa;
     }
 
-    public int getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(int preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 }

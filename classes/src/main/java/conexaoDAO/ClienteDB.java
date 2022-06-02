@@ -47,7 +47,7 @@ public class ClienteDB extends Database {
                 Cliente clienteTemp = new Cliente();
                 clienteTemp.setNome(result.getString("nome"));
                 clienteTemp.setEmail(result.getString("email"));
-                clienteTemp.setCpfCliente(result.getString("cpf"));
+                clienteTemp.setCpfCliente(result.getString("cpfCliente"));
 
 
                 System.out.println("NOME = " + clienteTemp.getNome());
