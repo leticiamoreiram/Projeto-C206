@@ -1,6 +1,8 @@
 package conexaoDAO;
 
 import classes.Mesa;
+import classes.Reserva;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -110,6 +112,41 @@ public class MesaDB extends Database {
             }
         }
         return check;
+    }
+
+    public Mesa buscarMesaPorCpf(String cpfCliente) {
+        Mesa mesaTemp = null;
+        connect();
+
+        String sql = "SELECT * FROM Mesa WHERE cpfCliente=?";
+
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, cpfCliente);
+            result = pst.executeQuery();
+
+            while (result.next()) {
+
+                mesaTemp = new Mesa();
+                mesaTemp.setNumMesa(result.getInt("numMesa"));
+                mesaTemp.setPreco(result.getDouble("preco"));
+
+                System.out.println("NUMERO DA MESA = " + mesaTemp.getNumMesa());
+                System.out.println("PRECO POR PESSOA = " + mesaTemp.getPreco());;
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            try {
+                connection.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+
+        return mesaTemp;
     }
 
 }

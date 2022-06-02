@@ -3,7 +3,7 @@ package classes;
 public class Mesa {
 
     private int numMesa;
-    private double preco;
+    private double preco = 40.5;
 
      public int getNumMesa() {
         return numMesa;

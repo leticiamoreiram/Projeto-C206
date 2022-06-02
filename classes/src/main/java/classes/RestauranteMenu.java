@@ -72,9 +72,14 @@ public class RestauranteMenu {
                 case 3:
                     sc.nextLine();
                     System.out.println("********************** DADOS DA RESERVA **********************");
-                    System.out.println("Para verificar informações sobre a sua resrva, informe seu CPF");
+                    System.out.println("Para verificar informações sobre a sua reserva, informe seu CPF");
 
-                    reservaDB.buscarReservaPorCpf(sc.nextLine());
+                    String cpf = null;
+                    cpf = sc.nextLine();
+                    reservaDB.buscarReservaPorCpf(cpf);
+
+                    System.out.println("Dados sobre a mesa: ");
+                    mesaDB.buscarMesaPorCpf(cpf);
 
 
                     break;
