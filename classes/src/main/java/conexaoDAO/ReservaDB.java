@@ -6,18 +6,18 @@ import java.util.ArrayList;
 
 public class ReservaDB extends Database {
 
-    // ----------------------------INSERINDO NOVO REGISTRO----------------------------
     public boolean inserirReserva(Reserva reserva){
         connect();
-        String sql = "INSERT INTO Reserva(numReserva, cpfCliente, numMesa, qtdPessoas) VALUES(?, ?, ?,?)";
+        String sql = "INSERT INTO Reserva(numReserva, cpfCliente, numMesa, qtdPessoas, data) VALUES(?, ?, ?,?,?)";
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, reserva.getNumReserva());      // concatena nome na primeira ? do comando
-            pst.setString(2, reserva.getCpfCliente());        // concatena nome na segunda ? do comando
-            pst.setInt(3, reserva.getNumMesa());        // concatena nome na terceira ? do comando
-            pst.setInt(3, reserva.getQtdPessoas());        // concatena nome na quarta ? do comando
-            pst.execute();                           // executa o comando
+            pst.setInt(1, reserva.getNumReserva());
+            pst.setString(2, reserva.getCpfCliente());
+            pst.setInt(3, reserva.getNumMesa());
+            pst.setInt(4, reserva.getQtdPessoas());
+            pst.setString(5, reserva.getDataReserva());
+            pst.execute();
             check = true;
 
         } catch (SQLException e) {
@@ -35,7 +35,6 @@ public class ReservaDB extends Database {
         return check;
     }
 
-    // ----------------------------BUSCANDO TODOS REGISTROS----------------------------
     public ArrayList<Reserva> buscarReserva(){
         connect();
         ArrayList<Reserva> listaReservas = new ArrayList<>();
@@ -46,16 +45,18 @@ public class ReservaDB extends Database {
 
             while(result.next()){
                 Reserva reservaTemp = new Reserva();
-                reservaTemp.setNumReserva(result.getInt("reserva"));
-                reservaTemp.setCpfCliente(result.getString("cpf"));
-                reservaTemp.setNumMesa(result.getInt("mesa"));
-                reservaTemp.setQtdPessoas(result.getInt("pessoas"));
+                reservaTemp.setNumReserva(result.getInt("numReserva"));
+                reservaTemp.setCpfCliente(result.getString("cpfCliente"));
+                reservaTemp.setNumMesa(result.getInt("numMesa"));
+                reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
+                reservaTemp.setDataReserva(result.getString("dataReserva"));
 
                 System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
                 System.out.println("CPF DO CLIENTE = " + reservaTemp.getCpfCliente());
                 System.out.println("NUMERO DA MESA= " + reservaTemp.getNumMesa());
                 System.out.println("QUANTIDADE DE PESSOAS = " + reservaTemp.getQtdPessoas());
-                System.out.println("------------------------------");
+                System.out.println("DATA DA RESERVA = " + reservaTemp.getDataReserva());
+                System.out.println("-------------------------------------------");
 
                 listaReservas.add(reservaTemp);
             }
@@ -75,17 +76,17 @@ public class ReservaDB extends Database {
         return listaReservas;
     }
 
-    // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
     public boolean atualizarReserva(int numReserva, Reserva reserva){
         connect();
-        String sql = "UPDATE Reserva SET cpfCliente=?, numMesa=?, qtdPessoas=? WHERE numReserva=?";
+        String sql = "UPDATE Reserva SET cpfCliente=?, numMesa=?, qtdPessoas=?, data=? WHERE numReserva=?";
 
         try{
             pst = connection.prepareStatement(sql);
             pst.setString(1, reserva.getCpfCliente());
             pst.setInt(2, reserva.getNumMesa());
             pst.setInt(3, reserva.getQtdPessoas());
-            pst.setInt(4, reserva.getNumReserva());
+            pst.setString(4, reserva.getDataReserva());
+            pst.setInt(5, reserva.getNumReserva());
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -102,7 +103,6 @@ public class ReservaDB extends Database {
         return check;
     }
 
-    // ----------------------------EXCLUINDO REGISTRO----------------------------
     public boolean deletarReserva(int numReserva) {
         connect();
         String sql = "DELETE FROM Reserva where numReserva=?";

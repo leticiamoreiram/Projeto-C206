@@ -6,6 +6,7 @@ public class Reserva {
     private String cpfCliente;
     private int numMesa;
     private int qtdPessoas;
+    private String dataReserva;
 
     public int getNumReserva() {
         return numReserva;
@@ -37,5 +38,13 @@ public class Reserva {
 
     public void setQtdPessoas(int qtdPessoas) {
         this.qtdPessoas = qtdPessoas;
+    }
+
+    public String getDataReserva() {
+        return dataReserva;
+    }
+
+    public void setDataReserva(String dataReserva) {
+        this.dataReserva = dataReserva;
     }
 }

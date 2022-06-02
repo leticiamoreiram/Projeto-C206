@@ -1,21 +1,19 @@
 package conexaoDAO;
 
-import classes.Cliente;
 import classes.Mesa;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MesaDB extends Database {
 
-    // ----------------------------INSERINDO NOVO REGISTRO----------------------------
     public boolean inserirMesa(Mesa mesa){
         connect();
-        String sql = "INSERT INTO Mesa(preco, numMesa) VALUES(?, ?)";
+        String sql = "INSERT INTO Mesa(numMesa, preco ) VALUES(?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setDouble(1, mesa.getPreco());      // concatena nome na primeira ? do comando
-            pst.setInt(2, mesa.getNumMesa());        // concatena nome na segunda ? do comando
+            pst.setInt(1, mesa.getNumMesa());      // concatena nome na primeira ? do comando
+            pst.setDouble(2, mesa.getPreco());        // concatena nome na segunda ? do comando
             pst.execute();                           // executa o comando
             check = true;
 
@@ -34,7 +32,6 @@ public class MesaDB extends Database {
         return check;
     }
 
-    // ----------------------------BUSCANDO TODOS REGISTROS----------------------------
     public ArrayList<Mesa> buscarMesa(){
         connect();
         ArrayList<Mesa> listaMesas = new ArrayList<>();
@@ -45,11 +42,11 @@ public class MesaDB extends Database {
 
             while(result.next()){
                 Mesa mesaTemp = new Mesa();
-                mesaTemp.setPreco(result.getDouble("preco"));
                 mesaTemp.setNumMesa(result.getInt("numMesa"));
+                mesaTemp.setPreco(result.getDouble("preco"));
 
                 System.out.println("PRECO POR PESSOA = " + mesaTemp.getNumMesa());
-                System.out.println("EMAIL = " + mesaTemp.getPreco());;
+                System.out.println("NUMERO DA MESA = " + mesaTemp.getPreco());;
                 System.out.println("------------------------------");
 
                 listaMesas.add(mesaTemp);
@@ -70,7 +67,6 @@ public class MesaDB extends Database {
         return listaMesas;
     }
 
-    // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
     public boolean atualizarMesa(Double preco, Mesa mesa){
         connect();
         String sql = "UPDATE Cliente SET preco=? WHERE numMesa=?";
@@ -94,10 +90,9 @@ public class MesaDB extends Database {
         return check;
     }
 
-    // ----------------------------EXCLUINDO REGISTRO----------------------------
     public boolean deletarMesa(int numMesa) {
         connect();
-        String sql = "DELETE FROM Mesa where cpfCliente=?";
+        String sql = "DELETE FROM Mesa where numMesa=?";
         try{
             pst = connection.prepareStatement(sql);
             pst.setInt(1, numMesa);
@@ -116,7 +111,5 @@ public class MesaDB extends Database {
         }
         return check;
     }
-
-
 
 }

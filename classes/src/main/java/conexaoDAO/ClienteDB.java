@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class ClienteDB extends Database {
 
-    // ----------------------------INSERINDO NOVO REGISTRO----------------------------
     public boolean inserirCliente(Cliente cliente){
         connect();
         String sql = "INSERT INTO Cliente(nome, email, cpfCliente) VALUES(?, ?, ?)";
@@ -34,7 +33,6 @@ public class ClienteDB extends Database {
         return check;
     }
 
-    // ----------------------------BUSCANDO TODOS REGISTROS----------------------------
     public ArrayList<Cliente> buscarCliente(){
         connect();
         ArrayList<Cliente> listaClientes = new ArrayList<>();
@@ -48,7 +46,6 @@ public class ClienteDB extends Database {
                 clienteTemp.setNome(result.getString("nome"));
                 clienteTemp.setEmail(result.getString("email"));
                 clienteTemp.setCpfCliente(result.getString("cpfCliente"));
-
 
                 System.out.println("NOME = " + clienteTemp.getNome());
                 System.out.println("EMAIL = " + clienteTemp.getEmail());
@@ -73,7 +70,6 @@ public class ClienteDB extends Database {
         return listaClientes;
     }
 
-    // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
     public boolean atualizarCliente(String cpf, Cliente cliente){
         connect();
         String sql = "UPDATE Cliente SET nome=?, email=? WHERE cpfCliente=?";
@@ -98,7 +94,6 @@ public class ClienteDB extends Database {
         return check;
     }
 
-    // ----------------------------EXCLUINDO REGISTRO----------------------------
     public boolean deletarCliente(String cpf) {
         connect();
         String sql = "DELETE FROM Cliente where cpfCliente=?";
