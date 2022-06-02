@@ -77,7 +77,7 @@ public class ClienteDB extends Database {
     // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
     public boolean atualizarCliente(String cpf, Cliente cliente){
         connect();
-        String sql = "UPDATE Cliente SET nome=?, email=? WHERE cpf=?";
+        String sql = "UPDATE Cliente SET nome=?, email=? WHERE cpfCliente=?";
         try{
             pst = connection.prepareStatement(sql);
             pst.setString(1, cliente.getNome());
@@ -102,7 +102,7 @@ public class ClienteDB extends Database {
     // ----------------------------EXCLUINDO REGISTRO----------------------------
     public boolean deletarCliente(String cpf) {
         connect();
-        String sql = "DELETE FROM Cliente where cpf=?";
+        String sql = "DELETE FROM Cliente where cpfCliente=?";
         try{
             pst = connection.prepareStatement(sql);
             pst.setString(1, cpf);

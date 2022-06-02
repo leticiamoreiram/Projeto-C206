@@ -1,8 +1,6 @@
 package conexaoDAO;
 
-import classes.Cliente;
 import classes.Reserva;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -78,14 +76,16 @@ public class ReservaDB extends Database {
     }
 
     // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
-    public boolean atualizarCliente(String cpf, Cliente cliente){
+    public boolean atualizarReserva(int numReserva, Reserva reserva){
         connect();
-        String sql = "UPDATE Cliente SET nome=?, email=? WHERE cpf=?";
+        String sql = "UPDATE Reserva SET cpfCliente=?, numMesa=?, qtdPessoas=? WHERE numReserva=?";
+
         try{
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getEmail());
-            pst.setString(3, cliente.getCpfCliente());
+            pst.setString(1, reserva.getCpfCliente());
+            pst.setInt(2, reserva.getNumMesa());
+            pst.setInt(3, reserva.getQtdPessoas());
+            pst.setInt(4, reserva.getNumReserva());
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -103,12 +103,12 @@ public class ReservaDB extends Database {
     }
 
     // ----------------------------EXCLUINDO REGISTRO----------------------------
-    public boolean deletarCliente(String cpf) {
+    public boolean deletarReserva(int numReserva) {
         connect();
-        String sql = "DELETE FROM Cliente where cpf=?";
+        String sql = "DELETE FROM Reserva where numReserva=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cpf);
+            pst.setInt(1, numReserva);
             pst.execute();
             check = true;
         }catch (SQLException e){
