@@ -8,14 +8,14 @@ public class ClienteDB extends Database {
 
     public boolean inserirCliente(Cliente cliente){
         connect();
-        String sql = "INSERT INTO Cliente(nome, email, cpfCliente) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO Cliente( cpfCliente, nome, email) VALUES(?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cliente.getNome());      // concatena nome na primeira ? do comando
-            pst.setString(2, cliente.getEmail());        // concatena nome na segunda ? do comando
-            pst.setString(3, cliente.getCpfCliente());        // concatena nome na terceira ? do comando
-            pst.execute();                           // executa o comando
+            pst.setString(1, cliente.getCpfCliente());
+            pst.setString(2, cliente.getNome());
+            pst.setString(3, cliente.getEmail());
+            pst.execute();
             check = true;
 
         } catch (SQLException e) {
@@ -43,9 +43,9 @@ public class ClienteDB extends Database {
 
             while(result.next()){
                 Cliente clienteTemp = new Cliente();
+                clienteTemp.setCpfCliente(result.getString("cpfCliente"));
                 clienteTemp.setNome(result.getString("nome"));
                 clienteTemp.setEmail(result.getString("email"));
-                clienteTemp.setCpfCliente(result.getString("cpfCliente"));
 
                 System.out.println("NOME = " + clienteTemp.getNome());
                 System.out.println("EMAIL = " + clienteTemp.getEmail());

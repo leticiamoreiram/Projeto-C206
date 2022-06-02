@@ -22,7 +22,7 @@ public class RestauranteMenu {
             System.out.println("** Menu: **");
             System.out.println("1- Cadastro");
             System.out.println("2- Fazer reserva");
-            //System.out.println("3- Ver minha reserva");
+            System.out.println("3- Ver reservas");
             //System.out.println("4- Cancelar reserva");
             System.out.println("5- Sair");
 
@@ -57,11 +57,16 @@ public class RestauranteMenu {
                     r.setCpfCliente(sc.nextLine());
                     System.out.println("Quantidade de pessoas: ");
                     r.setQtdPessoas(sc.nextInt());
+                    sc.nextLine();
+                    System.out.println("Data (dd/mm/aaaa): ");
+                    r.setDataReserva(sc.nextLine());
 
+                    reservaDB.inserirReserva(r);
 
                     break;
                 case 3:
 
+                    reservaDB.buscarReserva();
                     break;
                 case 4:
 
