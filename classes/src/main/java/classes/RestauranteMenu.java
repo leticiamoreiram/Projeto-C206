@@ -23,7 +23,7 @@ public class RestauranteMenu {
             System.out.println("1- Cadastro");
             System.out.println("2- Fazer reserva");
             System.out.println("3- Ver reservas");
-            //System.out.println("4- Cancelar reserva");
+            System.out.println("4- Cancelar reserva");
             System.out.println("5- Sair");
 
             int op = sc.nextInt();
@@ -48,6 +48,7 @@ public class RestauranteMenu {
                     break;
 
                 case 2:
+                    sc.nextLine();
                     System.out.println("*************** RESERVA ***************");
                     System.out.println("Digite as informações solicitadas abaixo");
                     System.out.println("________________________________________");
@@ -69,6 +70,9 @@ public class RestauranteMenu {
                     reservaDB.buscarReserva();
                     break;
                 case 4:
+
+
+                    clienteDB.deletarCliente("111.111.111-11");
 
                     break;
                 case 5:

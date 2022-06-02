@@ -8,7 +8,7 @@ public class ReservaDB extends Database {
 
     public boolean inserirReserva(Reserva reserva){
         connect();
-        String sql = "INSERT INTO Reserva(numReserva, cpfCliente, numMesa, qtdPessoas, data) VALUES(?, ?, ?,?,?)";
+        String sql = "INSERT INTO Reserva(numReserva, cpfCliente, numMesa, qtdPessoas, dataReserva) VALUES(?, ?, ?,?,?)";
         try {
 
             pst = connection.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class ReservaDB extends Database {
 
     public boolean atualizarReserva(int numReserva, Reserva reserva){
         connect();
-        String sql = "UPDATE Reserva SET cpfCliente=?, numMesa=?, qtdPessoas=?, data=? WHERE numReserva=?";
+        String sql = "UPDATE Reserva SET cpfCliente=?, numMesa=?, qtdPessoas=?, dataReserva=? WHERE numReserva=?";
 
         try{
             pst = connection.prepareStatement(sql);
