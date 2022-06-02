@@ -103,12 +103,12 @@ public class ReservaDB extends Database {
         return check;
     }
 
-    public boolean deletarReserva(int numReserva) {
+    public boolean deletarReserva(String cpfCliente) {
         connect();
-        String sql = "DELETE FROM Reserva where numReserva=?";
+        String sql = "DELETE FROM Reserva where cpfCliente=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, numReserva);
+            pst.setString(1, cpfCliente);
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -124,5 +124,48 @@ public class ReservaDB extends Database {
         }
         return check;
     }
+
+    public Reserva buscarReservaPorCpf(String cpfCliente) {
+        Reserva reservaTemp = null;
+        connect();
+
+        String sql = "SELECT * FROM Reserva WHERE cpfCliente=?";
+
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, cpfCliente);
+            result = pst.executeQuery();
+
+            while (result.next()) {
+
+                reservaTemp = new Reserva();
+                reservaTemp.setNumReserva(result.getInt("numReserva"));
+                reservaTemp.setCpfCliente(result.getString("cpfCliente"));
+                reservaTemp.setNumMesa(result.getInt("numMesa"));
+                reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
+                reservaTemp.setDataReserva(result.getString("dataReserva"));
+
+                System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
+                System.out.println("CPF DO CLIENTE = " + reservaTemp.getCpfCliente());
+                System.out.println("NUMERO DA MESA= " + reservaTemp.getNumMesa());
+                System.out.println("QUANTIDADE DE PESSOAS = " + reservaTemp.getQtdPessoas());
+                System.out.println("DATA DA RESERVA = " + reservaTemp.getDataReserva());
+
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            try {
+                connection.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+
+        return reservaTemp;
+    }
+
 
 }

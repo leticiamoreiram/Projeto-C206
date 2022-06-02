@@ -8,7 +8,7 @@ public class ClienteDB extends Database {
 
     public boolean inserirCliente(Cliente cliente){
         connect();
-        String sql = "INSERT INTO Cliente( cpfCliente, nome, email) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO Cliente(cpfCliente, nome, email) VALUES(?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
@@ -17,6 +17,7 @@ public class ClienteDB extends Database {
             pst.setString(3, cliente.getEmail());
             pst.execute();
             check = true;
+            System.out.println("Conexão feita com sucesso: "+ connection);
 
         } catch (SQLException e) {
             System.out.println("Erro de operação: " + e.getMessage());
