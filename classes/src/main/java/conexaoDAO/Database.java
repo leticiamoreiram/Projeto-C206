@@ -10,7 +10,7 @@ public abstract class Database {
 
     static final String user = "root";                  // usuário da instância local do servidor
     static final String password = "root";    // senha do usuário da instância local do servidor
-    static final String database = "ReservaRestauranteDB";           // nome do banco de dados a ser utilizado
+    static final String database = "ReservaDB";           // nome do banco de dados a ser utilizado
 
     // string com URL de conexão com servidor
     static final String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC&useSSL=false";

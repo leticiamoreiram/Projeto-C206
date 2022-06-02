@@ -19,6 +19,7 @@ public class ReservaDB extends Database {
             pst.setString(5, reserva.getDataReserva());
             pst.execute();
             check = true;
+            System.out.println("Reserva efetuada com sucesso!");
 
         } catch (SQLException e) {
             System.out.println("Erro de operação: " + e.getMessage());
@@ -76,9 +77,9 @@ public class ReservaDB extends Database {
         return listaReservas;
     }
 
-    public boolean atualizarReserva(int numReserva, Reserva reserva){
+    public boolean atualizarReserva(String cpfCliente, Reserva reserva){
         connect();
-        String sql = "UPDATE Reserva SET cpfCliente=?, numMesa=?, qtdPessoas=?, dataReserva=? WHERE numReserva=?";
+        String sql = "UPDATE Reserva SET numReserva=?, numMesa=?, qtdPessoas=?, dataReserva=? WHERE cpfCliente=?";
 
         try{
             pst = connection.prepareStatement(sql);
@@ -111,6 +112,7 @@ public class ReservaDB extends Database {
             pst.setString(1, cpfCliente);
             pst.execute();
             check = true;
+            System.out.println("Reserva cancelada");
         }catch (SQLException e){
             System.out.println("Erro de operação: " + e.getMessage());
             check = false;

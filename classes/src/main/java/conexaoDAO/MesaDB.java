@@ -114,15 +114,15 @@ public class MesaDB extends Database {
         return check;
     }
 
-    public Mesa buscarMesaPorCpf(String cpfCliente) {
+    public Mesa buscarMesaPorNum(int numMesa) {
         Mesa mesaTemp = null;
         connect();
 
-        String sql = "SELECT * FROM Mesa WHERE cpfCliente=?";
+        String sql = "SELECT * FROM Mesa WHERE numMesa=?";
 
         try {
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cpfCliente);
+            pst.setInt(1, numMesa);
             result = pst.executeQuery();
 
             while (result.next()) {

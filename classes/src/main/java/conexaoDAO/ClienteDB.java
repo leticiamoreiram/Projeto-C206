@@ -17,7 +17,7 @@ public class ClienteDB extends Database {
             pst.setString(3, cliente.getEmail());
             pst.execute();
             check = true;
-            System.out.println("Conexão feita com sucesso: "+ connection);
+            System.out.println("Cadastro realizado com sucesso");
 
         } catch (SQLException e) {
             System.out.println("Erro de operação: " + e.getMessage());
