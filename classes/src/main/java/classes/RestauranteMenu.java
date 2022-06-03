@@ -59,15 +59,12 @@ public class RestauranteMenu {
 
                     Reserva r = new Reserva();;
                     Mesa m = new Mesa();
-                    double preco = 0;
-                    int qtdPessoas = 0;
-                    int numMesa = 0;
 
                     System.out.println("Cpf: ");
                     r.setCpfCliente(sc.nextLine());
 
                     System.out.println("Quantidade de pessoas: ");
-                    qtdPessoas = sc.nextInt();
+                    int qtdPessoas = sc.nextInt();
                     r.setQtdPessoas(qtdPessoas);
 
                     sc.nextLine();
@@ -75,11 +72,11 @@ public class RestauranteMenu {
                     r.setDataReserva(sc.nextLine());
 
                     System.out.println("Escolha uma mesa de 1 a 10: ");
-                    numMesa = sc.nextInt();
+                    int numMesa = sc.nextInt();
                     r.setNumMesa(numMesa);
                     m.setNumMesa(numMesa);
 
-                    preco = 40.8 * qtdPessoas;
+                    double preco = 40.8 * qtdPessoas;
                     m.setPreco(preco);
 
                     mesaDB.inserirMesa(m);
@@ -93,6 +90,7 @@ public class RestauranteMenu {
 
                     reservaDB.buscarReservaPorCpf(sc.nextLine());
 
+                    System.out.println();
                     System.out.println("Entre com o numero da mesa para verificar o valor da sua reserva: ");
                     mesaDB.buscarMesaPorNum(sc.nextInt());
 

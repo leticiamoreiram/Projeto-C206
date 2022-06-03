@@ -14,9 +14,9 @@ public class MesaDB extends Database {
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, mesa.getNumMesa());      // concatena nome na primeira ? do comando
-            pst.setDouble(2, mesa.getPreco());        // concatena nome na segunda ? do comando
-            pst.execute();                           // executa o comando
+            pst.setInt(1, mesa.getNumMesa());
+            pst.setDouble(2, mesa.getPreco());
+            pst.execute();
             check = true;
 
         } catch (SQLException e) {
