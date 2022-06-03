@@ -9,12 +9,12 @@ import java.util.Scanner;
 public class RestauranteMenu {
     public static void main(String[] args) {
 
-    ClienteDB clienteDB = new ClienteDB();
-    ReservaDB reservaDB = new ReservaDB();
-    MesaDB mesaDB = new MesaDB();
+        ClienteDB clienteDB = new ClienteDB();
+        ReservaDB reservaDB = new ReservaDB();
+        MesaDB mesaDB = new MesaDB();
 
-    Scanner sc = new Scanner(System.in);
-    boolean flag = true;
+        Scanner sc = new Scanner(System.in);
+        boolean flag = true;
 
         System.out.println("******  Bem-vindo ao Restaurante    ******");
         System.out.println("__________________________________________");
@@ -24,7 +24,7 @@ public class RestauranteMenu {
             System.out.println("2- Fazer reserva");
             System.out.println("3- Ver minha reserva");
             System.out.println("4- Cancelar reserva");
-            System.out.println("5- Cancelar reserva");
+            System.out.println("5- Alterar reserva");
             System.out.println("6- Sair");
             System.out.println("_______________________");
             System.out.println(" ");
@@ -59,25 +59,31 @@ public class RestauranteMenu {
 
                     Reserva r = new Reserva();;
                     Mesa m = new Mesa();
+                    double preco = 0;
+                    int qtdPessoas = 0;
+                    int numMesa = 0;
+
                     System.out.println("Cpf: ");
                     r.setCpfCliente(sc.nextLine());
+
                     System.out.println("Quantidade de pessoas: ");
-                    r.setQtdPessoas(sc.nextInt());
+                    qtdPessoas = sc.nextInt();
+                    r.setQtdPessoas(qtdPessoas);
+
                     sc.nextLine();
                     System.out.println("Data (dd/mm/aaaa): ");
                     r.setDataReserva(sc.nextLine());
 
-                   int num;
-                    System.out.println("Selecione a mesa: ");
-                    num = sc.nextInt();
-                    r.setNumMesa(num);
-                    m.setNumMesa(num);
+                    System.out.println("Escolha uma mesa de 1 a 10: ");
+                    numMesa = sc.nextInt();
+                    r.setNumMesa(numMesa);
+                    m.setNumMesa(numMesa);
 
-                    m.setPreco(40);
+                    preco = 40.8 * qtdPessoas;
+                    m.setPreco(preco);
+
                     mesaDB.inserirMesa(m);
-
                     reservaDB.inserirReserva(r);
-
 
                     break;
                 case 3:
@@ -87,7 +93,7 @@ public class RestauranteMenu {
 
                     reservaDB.buscarReservaPorCpf(sc.nextLine());
 
-                    System.out.println("Entre com o numero da mesa: ");
+                    System.out.println("Entre com o numero da mesa para verificar o valor da sua reserva: ");
                     mesaDB.buscarMesaPorNum(sc.nextInt());
 
                     break;
@@ -99,14 +105,11 @@ public class RestauranteMenu {
 
                     reservaDB.deletarReserva(sc.nextLine());
 
-
                     break;
                 case 5:
                     sc.nextLine();
                     System.out.println("********************** ALTERAR RESERVA **********************");
                     System.out.println("Para alterar informações sobre a sua reserva, informe seu CPF");
-
-
 
                     break;
                 case 6:

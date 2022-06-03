@@ -20,7 +20,7 @@ public class MesaDB extends Database {
             check = true;
 
         } catch (SQLException e) {
-            System.out.println("Erro de operação: " + e.getMessage());
+            System.out.println("Mesa indisponível: " + e.getMessage());
             check = false;
         }
         finally {
@@ -131,8 +131,7 @@ public class MesaDB extends Database {
                 mesaTemp.setNumMesa(result.getInt("numMesa"));
                 mesaTemp.setPreco(result.getDouble("preco"));
 
-                System.out.println("NUMERO DA MESA = " + mesaTemp.getNumMesa());
-                System.out.println("PRECO POR PESSOA = " + mesaTemp.getPreco());;
+                System.out.println("VALOR TOTAL DA RESERVA CORRESPONDENTE À MESA " +  mesaTemp.getNumMesa() +" = "+ mesaTemp.getPreco());
 
             }
         } catch (SQLException e) {

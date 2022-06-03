@@ -5,7 +5,7 @@ public class Mesa {
     private int numMesa;
     private double preco;
 
-     public int getNumMesa() {
+    public int getNumMesa() {
         return numMesa;
     }
 
