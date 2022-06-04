@@ -10,17 +10,18 @@ public class MesaDB extends Database {
 
     public boolean inserirMesa(Mesa mesa){
         connect();
-        String sql = "INSERT INTO Mesa(numMesa, preco ) VALUES(?, ?)";
+        String sql = "INSERT INTO Mesa(numMesa, preco, cpfCliente) VALUES(?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, mesa.getNumMesa());
-            pst.setDouble(2, mesa.getPreco());
-            pst.execute();
+            pst.setInt(1, mesa.getNumMesa());      // concatena nome na primeira ? do comando
+            pst.setDouble(2, mesa.getPreco());        // concatena nome na segunda ? do comando
+            pst.setString(3, mesa.getCpfCliente());        // concatena nome na segunda ? do comando
+            pst.execute();                           // executa o comando
             check = true;
 
         } catch (SQLException e) {
-            System.out.println("Mesa indisponível: " + e.getMessage());
+            System.out.println("Erro de operação: " + e.getMessage());
             check = false;
         }
         finally {
@@ -46,6 +47,7 @@ public class MesaDB extends Database {
                 Mesa mesaTemp = new Mesa();
                 mesaTemp.setNumMesa(result.getInt("numMesa"));
                 mesaTemp.setPreco(result.getDouble("preco"));
+                mesaTemp.setPreco(result.getDouble("cpfCliente"));
 
                 System.out.println("PRECO POR PESSOA = " + mesaTemp.getNumMesa());
                 System.out.println("NUMERO DA MESA = " + mesaTemp.getPreco());;
@@ -69,13 +71,14 @@ public class MesaDB extends Database {
         return listaMesas;
     }
 
-    public boolean atualizarMesa(Double preco, Mesa mesa){
+    public boolean atualizarMesa(Mesa mesa, String cpfCliente){
         connect();
-        String sql = "UPDATE Cliente SET preco=? WHERE numMesa=?";
+        String sql = "UPDATE Cliente SET preco=?, cpfCliente=? WHERE numMesa=?";
         try{
             pst = connection.prepareStatement(sql);
             pst.setDouble(1, mesa.getPreco());
             pst.setInt(2, mesa.getNumMesa());
+            pst.setString(3, mesa.getCpfCliente());
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -92,12 +95,12 @@ public class MesaDB extends Database {
         return check;
     }
 
-    public boolean deletarMesa(int numMesa) {
+    public boolean deletarMesa(String cpfCliente) {
         connect();
-        String sql = "DELETE FROM Mesa where numMesa=?";
+        String sql = "DELETE FROM Mesa where cpfCliente=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, numMesa);
+            pst.setString(1, cpfCliente);
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -114,15 +117,15 @@ public class MesaDB extends Database {
         return check;
     }
 
-    public Mesa buscarMesaPorNum(int numMesa) {
+    public Mesa buscarMesaPorCpf(String cpfCliente) {
         Mesa mesaTemp = null;
         connect();
 
-        String sql = "SELECT * FROM Mesa WHERE numMesa=?";
+        String sql = "SELECT * FROM Mesa WHERE cpfCliente=?";
 
         try {
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, numMesa);
+            pst.setString(1, cpfCliente);
             result = pst.executeQuery();
 
             while (result.next()) {
@@ -130,8 +133,9 @@ public class MesaDB extends Database {
                 mesaTemp = new Mesa();
                 mesaTemp.setNumMesa(result.getInt("numMesa"));
                 mesaTemp.setPreco(result.getDouble("preco"));
+                mesaTemp.setCpfCliente(result.getString("cpfCliente"));
 
-                System.out.println("VALOR TOTAL DA RESERVA CORRESPONDENTE À MESA " +  mesaTemp.getNumMesa() +" = "+ mesaTemp.getPreco());
+                System.out.println("VALOR TOTAL DA RESERVA CORRESPONDENTE À MESA " +  mesaTemp.getNumMesa() +" = R$"+ mesaTemp.getPreco());
 
             }
         } catch (SQLException e) {

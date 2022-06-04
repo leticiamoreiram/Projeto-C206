@@ -60,8 +60,11 @@ public class RestauranteMenu {
                     Reserva r = new Reserva();;
                     Mesa m = new Mesa();
 
+                    String cpf = null;
                     System.out.println("Cpf: ");
-                    r.setCpfCliente(sc.nextLine());
+                    cpf = sc.nextLine();
+                    r.setCpfCliente(cpf);
+                    m.setCpfCliente(cpf);
 
                     System.out.println("Quantidade de pessoas: ");
                     int qtdPessoas = sc.nextInt();
@@ -71,10 +74,17 @@ public class RestauranteMenu {
                     System.out.println("Data (dd/mm/aaaa): ");
                     r.setDataReserva(sc.nextLine());
 
-                    System.out.println("Escolha uma mesa de 1 a 10: ");
-                    int numMesa = sc.nextInt();
-                    r.setNumMesa(numMesa);
+                    int numMesa = 0;
+
+                    do
+                    {
+                        System.out.println("Escolha uma mesa de 1 a 10");
+                        numMesa = sc.nextInt();
+                    }
+                    while(numMesa < 1 || numMesa > 10);
+
                     m.setNumMesa(numMesa);
+                    r.setNumMesa(numMesa);
 
                     double preco = 40.8 * qtdPessoas;
                     m.setPreco(preco);
@@ -82,17 +92,17 @@ public class RestauranteMenu {
                     mesaDB.inserirMesa(m);
                     reservaDB.inserirReserva(r);
 
+
                     break;
                 case 3:
                     sc.nextLine();
                     System.out.println("********************** DADOS DA RESERVA **********************");
                     System.out.println("Para verificar informações sobre a sua reserva, informe seu CPF");
 
-                    reservaDB.buscarReservaPorCpf(sc.nextLine());
+                    String cpfCliente = sc.nextLine();
 
-                    System.out.println();
-                    System.out.println("Entre com o numero da mesa para verificar o valor da sua reserva: ");
-                    mesaDB.buscarMesaPorNum(sc.nextInt());
+                    reservaDB.buscarReservaPorCpf(cpfCliente);
+                    mesaDB.buscarMesaPorCpf(cpfCliente);
 
                     break;
                 case 4:
@@ -101,13 +111,25 @@ public class RestauranteMenu {
                     System.out.println("Para cancelar sua reserva, informe seu CPF");
                     System.out.println("__________________________________________");
 
-                    reservaDB.deletarReserva(sc.nextLine());
+                    String CPF = null;
+                    CPF = sc.nextLine();
+
+                    reservaDB.deletarReserva(CPF);
+                    mesaDB.deletarMesa(CPF);
 
                     break;
                 case 5:
                     sc.nextLine();
                     System.out.println("********************** ALTERAR RESERVA **********************");
-                    System.out.println("Para alterar informações sobre a sua reserva, informe seu CPF");
+                    System.out.println("Para alterar informações sobre a sua reserva, insira os dados solicitados");
+                    System.out.println();
+                    System.out.println("Cpf: ");
+
+                    reservaDB.buscarReservaPorCpf(sc.nextLine());
+
+
+
+
 
                     break;
                 case 6:
