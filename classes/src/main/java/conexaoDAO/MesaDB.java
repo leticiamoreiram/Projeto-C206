@@ -51,7 +51,7 @@ public class MesaDB extends Database {
 
                 System.out.println("PRECO POR PESSOA = " + mesaTemp.getNumMesa());
                 System.out.println("NUMERO DA MESA = " + mesaTemp.getPreco());;
-                System.out.println("------------------------------");
+                System.out.println(" ");
 
                 listaMesas.add(mesaTemp);
             }
@@ -136,6 +136,7 @@ public class MesaDB extends Database {
                 mesaTemp.setCpfCliente(result.getString("cpfCliente"));
 
                 System.out.println("VALOR TOTAL DA RESERVA CORRESPONDENTE À MESA " +  mesaTemp.getNumMesa() +" = R$"+ mesaTemp.getPreco());
+                System.out.println(" ");
 
             }
         } catch (SQLException e) {

@@ -20,6 +20,7 @@ public class ReservaDB extends Database {
             pst.execute();
             check = true;
             System.out.println("Reserva efetuada com sucesso!");
+            System.out.println(" ");
 
         } catch (SQLException e) {
             System.out.println("Erro de operação: " + e.getMessage());
@@ -52,12 +53,12 @@ public class ReservaDB extends Database {
                 reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
                 reservaTemp.setDataReserva(result.getString("dataReserva"));
 
-                System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
                 System.out.println("CPF DO CLIENTE = " + reservaTemp.getCpfCliente());
+                System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
                 System.out.println("NUMERO DA MESA= " + reservaTemp.getNumMesa());
                 System.out.println("QUANTIDADE DE PESSOAS = " + reservaTemp.getQtdPessoas());
                 System.out.println("DATA DA RESERVA = " + reservaTemp.getDataReserva());
-                System.out.println("-------------------------------------------");
+                System.out.println(" ");
 
                 listaReservas.add(reservaTemp);
             }
@@ -77,18 +78,18 @@ public class ReservaDB extends Database {
         return listaReservas;
     }
 
-    public boolean atualizarReserva(String cpfCliente, int qtdPessoas, String dataReserva){
+    public boolean atualizarReserva(String cpfCliente, String dataReserva){
         connect();
-        String sql = "UPDATE Reserva SET qtdPessoas=?, dataReserva=? WHERE cpfCliente=?";
+        String sql = "UPDATE Reserva SET  dataReserva=? WHERE cpfCliente=?";
 
         try{
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, qtdPessoas);
-            pst.setString(2, dataReserva);
-            pst.setString(3,cpfCliente);
-
+            pst.setString(1, dataReserva);
+            pst.setString(2,cpfCliente);
             pst.execute();
             check = true;
+            System.out.println("Alterações realizadas com sucesso!");
+            System.out.println(" ");
         }catch (SQLException e){
             System.out.println("Erro de operação: " + e.getMessage());
             check = false;
@@ -111,7 +112,8 @@ public class ReservaDB extends Database {
             pst.setString(1, cpfCliente);
             pst.execute();
             check = true;
-            System.out.println("Reserva cancelada");
+            System.out.println("Reserva cancelada!");
+            System.out.println(" ");
         }catch (SQLException e){
             System.out.println("Erro de operação: " + e.getMessage());
             check = false;
@@ -146,12 +148,11 @@ public class ReservaDB extends Database {
                 reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
                 reservaTemp.setDataReserva(result.getString("dataReserva"));
 
-                System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
                 System.out.println("CPF DO CLIENTE = " + reservaTemp.getCpfCliente());
+                System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
                 System.out.println("NUMERO DA MESA= " + reservaTemp.getNumMesa());
                 System.out.println("QUANTIDADE DE PESSOAS = " + reservaTemp.getQtdPessoas());
                 System.out.println("DATA DA RESERVA = " + reservaTemp.getDataReserva());
-
 
             }
         } catch (SQLException e) {

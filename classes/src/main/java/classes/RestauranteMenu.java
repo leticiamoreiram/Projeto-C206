@@ -23,8 +23,8 @@ public class RestauranteMenu {
             System.out.println("1- Cadastro");
             System.out.println("2- Fazer reserva");
             System.out.println("3- Ver minha reserva");
-            System.out.println("4- Cancelar reserva");
-            System.out.println("5- Alterar reserva");
+            System.out.println("4- Alterar data da reserva");
+            System.out.println("5- Cancelar reserva");
             System.out.println("6- Sair");
             System.out.println("_______________________");
             System.out.println(" ");
@@ -105,19 +105,8 @@ public class RestauranteMenu {
 
                     break;
                 case 4:
-                    sc.nextLine();
-                    System.out.println("************ CANCELAR RESERVA ************");
-                    System.out.println("Para cancelar sua reserva, informe seu CPF");
-                    System.out.println("__________________________________________");
 
-                    String CPF = null;
-                    CPF = sc.nextLine();
 
-                    reservaDB.deletarReserva(CPF);
-                    mesaDB.deletarMesa(CPF);
-
-                    break;
-                case 5:
                     sc.nextLine();
                     System.out.println("********************** ALTERAR RESERVA **********************");
                     System.out.println("Para alterar informações sobre a sua reserva, insira os dados solicitados");
@@ -129,11 +118,19 @@ public class RestauranteMenu {
                     System.out.println("Nova data: ");
                     String dia = sc.nextLine();
 
-                    System.out.println("Quantidade de pessoas: ");
-                    int qtd = sc.nextInt();
+                    reservaDB.atualizarReserva(clienteCpf, dia);
 
+                    break;
+                case 5:
+                    sc.nextLine();
+                    System.out.println("************ CANCELAR RESERVA ************");
+                    System.out.println("Para cancelar sua reserva, informe seu CPF");
+                    System.out.println("__________________________________________");
 
-                    reservaDB.atualizarReserva(clienteCpf, qtd, dia);
+                    String CPF = sc.nextLine();
+
+                    reservaDB.deletarReserva(CPF);
+                    mesaDB.deletarMesa(CPF);
 
 
                     break;
