@@ -77,17 +77,16 @@ public class ReservaDB extends Database {
         return listaReservas;
     }
 
-    public boolean atualizarReserva(String cpfCliente, Reserva reserva){
+    public boolean atualizarReserva(String cpfCliente, int qtdPessoas, String dataReserva){
         connect();
-        String sql = "UPDATE Reserva SET numReserva=?, numMesa=?, qtdPessoas=?, dataReserva=? WHERE cpfCliente=?";
+        String sql = "UPDATE Reserva SET qtdPessoas=?, dataReserva=? WHERE cpfCliente=?";
 
         try{
             pst = connection.prepareStatement(sql);
-            pst.setString(1, reserva.getCpfCliente());
-            pst.setInt(2, reserva.getNumMesa());
-            pst.setInt(3, reserva.getQtdPessoas());
-            pst.setString(4, reserva.getDataReserva());
-            pst.setInt(5, reserva.getNumReserva());
+            pst.setInt(1, qtdPessoas);
+            pst.setString(2, dataReserva);
+            pst.setString(3,cpfCliente);
+
             pst.execute();
             check = true;
         }catch (SQLException e){

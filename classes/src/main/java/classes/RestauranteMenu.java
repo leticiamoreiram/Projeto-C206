@@ -60,9 +60,8 @@ public class RestauranteMenu {
                     Reserva r = new Reserva();;
                     Mesa m = new Mesa();
 
-                    String cpf = null;
                     System.out.println("Cpf: ");
-                    cpf = sc.nextLine();
+                    String cpf = sc.nextLine();
                     r.setCpfCliente(cpf);
                     m.setCpfCliente(cpf);
 
@@ -123,12 +122,18 @@ public class RestauranteMenu {
                     System.out.println("********************** ALTERAR RESERVA **********************");
                     System.out.println("Para alterar informações sobre a sua reserva, insira os dados solicitados");
                     System.out.println();
-                    System.out.println("Cpf: ");
 
-                    reservaDB.buscarReservaPorCpf(sc.nextLine());
+                    System.out.println("Cpf do titular da reserva: ");
+                    String clienteCpf = sc.nextLine();
+
+                    System.out.println("Nova data: ");
+                    String dia = sc.nextLine();
+
+                    System.out.println("Quantidade de pessoas: ");
+                    int qtd = sc.nextInt();
 
 
-
+                    reservaDB.atualizarReserva(clienteCpf, qtd, dia);
 
 
                     break;

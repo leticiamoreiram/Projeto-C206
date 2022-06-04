@@ -71,7 +71,7 @@ public class MesaDB extends Database {
         return listaMesas;
     }
 
-    public boolean atualizarMesa(Mesa mesa, String cpfCliente){
+    public boolean atualizarMesa(Double preco, Mesa mesa, String cpfCliente){
         connect();
         String sql = "UPDATE Cliente SET preco=?, cpfCliente=? WHERE numMesa=?";
         try{
