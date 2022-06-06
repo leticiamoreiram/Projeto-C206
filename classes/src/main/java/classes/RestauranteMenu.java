@@ -65,8 +65,14 @@ public class RestauranteMenu {
                     r.setCpfCliente(cpf);
                     m.setCpfCliente(cpf);
 
-                    System.out.println("Quantidade de pessoas: ");
-                    int qtdPessoas = sc.nextInt();
+                    int qtdPessoas = 0;
+                    do
+                    {
+                        System.out.println("Quantidade de pessoas (permitido até 10 pessoas em cada mesa): ");
+                        qtdPessoas = sc.nextInt();
+                    }
+                    while(qtdPessoas < 1 || qtdPessoas > 10);
+
                     r.setQtdPessoas(qtdPessoas);
 
                     sc.nextLine();
@@ -74,7 +80,6 @@ public class RestauranteMenu {
                     r.setDataReserva(sc.nextLine());
 
                     int numMesa = 0;
-
                     do
                     {
                         System.out.println("Escolha uma mesa de 1 a 10");
