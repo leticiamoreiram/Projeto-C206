@@ -4,16 +4,16 @@ public class Mesa {
 
     private int numMesa;
     private double preco;
-    private String cpfCliente;
+    private String Cliente_cpfCliente;
 
 
 
     public String getCpfCliente() {
-        return cpfCliente;
+        return Cliente_cpfCliente;
     }
 
     public void setCpfCliente(String cpfCliente) {
-        this.cpfCliente = cpfCliente;
+        this.Cliente_cpfCliente = cpfCliente;
     }
 
     public int getNumMesa() {

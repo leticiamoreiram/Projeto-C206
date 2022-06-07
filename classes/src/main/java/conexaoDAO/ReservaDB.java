@@ -8,7 +8,7 @@ public class ReservaDB extends Database {
 
     public boolean inserirReserva(Reserva reserva){
         connect();
-        String sql = "INSERT INTO Reserva(numReserva, cpfCliente, numMesa, qtdPessoas, dataReserva) VALUES(?, ?, ?,?,?)";
+        String sql = "INSERT INTO Reserva(numReserva, Cliente_cpfCliente, numMesa, qtdPessoas, dataReserva) VALUES(?, ?, ?,?,?)";
         try {
 
             pst = connection.prepareStatement(sql);
@@ -78,14 +78,14 @@ public class ReservaDB extends Database {
         return listaReservas;
     }
 
-    public boolean atualizarReserva(String cpfCliente, String dataReserva){
+    public boolean atualizarReserva(String Cliente_cpfCliente, String dataReserva){
         connect();
-        String sql = "UPDATE Reserva SET  dataReserva=? WHERE cpfCliente=?";
+        String sql = "UPDATE Reserva SET  dataReserva=? WHERE Cliente_cpfCliente=?";
 
         try{
             pst = connection.prepareStatement(sql);
             pst.setString(1, dataReserva);
-            pst.setString(2,cpfCliente);
+            pst.setString(2,Cliente_cpfCliente);
             pst.execute();
             check = true;
             System.out.println("Alterações realizadas com sucesso!");
@@ -104,12 +104,12 @@ public class ReservaDB extends Database {
         return check;
     }
 
-    public boolean deletarReserva(String cpfCliente) {
+    public boolean deletarReserva(String Cliente_cpfCliente) {
         connect();
-        String sql = "DELETE FROM Reserva where cpfCliente=?";
+        String sql = "DELETE FROM Reserva where Cliente_cpfCliente=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cpfCliente);
+            pst.setString(1, Cliente_cpfCliente);
             pst.execute();
             check = true;
             System.out.println("Reserva cancelada!");
@@ -128,22 +128,22 @@ public class ReservaDB extends Database {
         return check;
     }
 
-    public Reserva buscarReservaPorCpf(String cpfCliente) {
+    public Reserva buscarReservaPorCpf(String Cliente_cpfCliente) {
         Reserva reservaTemp = null;
         connect();
 
-        String sql = "SELECT * FROM Reserva WHERE cpfCliente=?";
+        String sql = "SELECT * FROM Reserva WHERE Cliente_cpfCliente=?";
 
         try {
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cpfCliente);
+            pst.setString(1, Cliente_cpfCliente);
             result = pst.executeQuery();
 
             while (result.next()) {
 
                 reservaTemp = new Reserva();
                 reservaTemp.setNumReserva(result.getInt("numReserva"));
-                reservaTemp.setCpfCliente(result.getString("cpfCliente"));
+                reservaTemp.setCpfCliente(result.getString("Cliente_cpfCliente"));
                 reservaTemp.setNumMesa(result.getInt("numMesa"));
                 reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
                 reservaTemp.setDataReserva(result.getString("dataReserva"));
@@ -170,4 +170,31 @@ public class ReservaDB extends Database {
     }
 
 
+
+
+
+    public boolean reservaHasMesa(int Reserva_numReserva, int Mesa_numMesa) {
+
+        connect();
+        String sql = "INSERT INTO Reserva_has_Mesa (Reserva_numReserva, Mesa_numMesa) values(?,?)";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, Reserva_numReserva);
+            pst.setInt(2, Mesa_numMesa);
+            pst.execute();
+            check = true;
+        } catch (SQLException exc) {
+            System.out.println("Erro: " + exc.getMessage());
+            check = false;
+        } finally {
+            try {
+                connection.close();
+                pst.close();
+            } catch (SQLException exc) {
+                System.out.println("Erro: " + exc.getMessage());
+            }
+        }
+
+        return check;
+    }
 }

@@ -3,7 +3,7 @@ package classes;
 public class Reserva {
 
     private int numReserva;
-    private String cpfCliente;
+    private String Cliente_cpfCliente;
     private int numMesa;
     private int qtdPessoas;
     private String dataReserva;
@@ -17,11 +17,11 @@ public class Reserva {
     }
 
     public String getCpfCliente() {
-        return cpfCliente;
+        return Cliente_cpfCliente;
     }
 
     public void setCpfCliente(String cpfCliente) {
-        this.cpfCliente = cpfCliente;
+        this.Cliente_cpfCliente = cpfCliente;
     }
 
     public int getNumMesa() {

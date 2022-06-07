@@ -89,12 +89,15 @@ public class RestauranteMenu {
 
                     m.setNumMesa(numMesa);
                     r.setNumMesa(numMesa);
+                    r.setNumReserva(numMesa);
 
                     double preco = 40.8 * qtdPessoas;
                     m.setPreco(preco);
 
+                    int numReserva= numMesa;
                     mesaDB.inserirMesa(m);
                     reservaDB.inserirReserva(r);
+                    reservaDB.reservaHasMesa(numReserva,numMesa);
 
 
                     break;

@@ -10,7 +10,7 @@ public class MesaDB extends Database {
 
     public boolean inserirMesa(Mesa mesa){
         connect();
-        String sql = "INSERT INTO Mesa(numMesa, preco, cpfCliente) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO Mesa(numMesa, preco, Cliente_cpfCliente) VALUES(?, ?, ?)";
         try {
 
             pst = connection.prepareStatement(sql);
@@ -95,12 +95,12 @@ public class MesaDB extends Database {
         return check;
     }
 
-    public boolean deletarMesa(String cpfCliente) {
+    public boolean deletarMesa(String Cliente_cpfCliente) {
         connect();
-        String sql = "DELETE FROM Mesa where cpfCliente=?";
+        String sql = "DELETE FROM Mesa where Cliente_cpfCliente=?";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cpfCliente);
+            pst.setString(1, Cliente_cpfCliente);
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -117,15 +117,15 @@ public class MesaDB extends Database {
         return check;
     }
 
-    public Mesa buscarMesaPorCpf(String cpfCliente) {
+    public Mesa buscarMesaPorCpf(String Cliente_cpfCliente) {
         Mesa mesaTemp = null;
         connect();
 
-        String sql = "SELECT * FROM Mesa WHERE cpfCliente=?";
+        String sql = "SELECT * FROM Mesa WHERE Cliente_cpfCliente=?";
 
         try {
             pst = connection.prepareStatement(sql);
-            pst.setString(1, cpfCliente);
+            pst.setString(1, Cliente_cpfCliente);
             result = pst.executeQuery();
 
             while (result.next()) {
@@ -133,7 +133,7 @@ public class MesaDB extends Database {
                 mesaTemp = new Mesa();
                 mesaTemp.setNumMesa(result.getInt("numMesa"));
                 mesaTemp.setPreco(result.getDouble("preco"));
-                mesaTemp.setCpfCliente(result.getString("cpfCliente"));
+                mesaTemp.setCpfCliente(result.getString("Cliente_cpfCliente"));
 
                 System.out.println("VALOR TOTAL DA RESERVA CORRESPONDENTE À MESA " +  mesaTemp.getNumMesa() +" = R$"+ mesaTemp.getPreco());
                 System.out.println(" ");
