@@ -14,9 +14,7 @@ public class Cliente {
         return email;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public void setNome(String nome) { this.nome = nome; }
 
     public void setEmail(String email) {
         this.email = email;
