@@ -8,15 +8,14 @@ public class ReservaDB extends Database {
 
     public boolean inserirReserva(Reserva reserva){
         connect();
-        String sql = "INSERT INTO Reserva(numReserva, Cliente_cpfCliente, numMesa, qtdPessoas, dataReserva) VALUES(?, ?, ?,?,?)";
+        String sql = "INSERT INTO Reserva(numReserva, Cliente_cpfCliente, qtdPessoas, dataReserva) VALUES(?, ?,?,?)";
         try {
 
             pst = connection.prepareStatement(sql);
             pst.setInt(1, reserva.getNumReserva());
             pst.setString(2, reserva.getCpfCliente());
-            pst.setInt(3, reserva.getNumMesa());
-            pst.setInt(4, reserva.getQtdPessoas());
-            pst.setString(5, reserva.getDataReserva());
+              pst.setInt(3, reserva.getQtdPessoas());
+            pst.setString(4, reserva.getDataReserva());
             pst.execute();
             check = true;
             System.out.println("Reserva efetuada com sucesso!");
@@ -49,13 +48,11 @@ public class ReservaDB extends Database {
                 Reserva reservaTemp = new Reserva();
                 reservaTemp.setNumReserva(result.getInt("numReserva"));
                 reservaTemp.setCpfCliente(result.getString("cpfCliente"));
-                reservaTemp.setNumMesa(result.getInt("numMesa"));
                 reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
                 reservaTemp.setDataReserva(result.getString("dataReserva"));
 
                 System.out.println("CPF DO CLIENTE = " + reservaTemp.getCpfCliente());
                 System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
-                System.out.println("NUMERO DA MESA= " + reservaTemp.getNumMesa());
                 System.out.println("QUANTIDADE DE PESSOAS = " + reservaTemp.getQtdPessoas());
                 System.out.println("DATA DA RESERVA = " + reservaTemp.getDataReserva());
                 System.out.println(" ");
@@ -144,13 +141,11 @@ public class ReservaDB extends Database {
                 reservaTemp = new Reserva();
                 reservaTemp.setNumReserva(result.getInt("numReserva"));
                 reservaTemp.setCpfCliente(result.getString("Cliente_cpfCliente"));
-                reservaTemp.setNumMesa(result.getInt("numMesa"));
                 reservaTemp.setQtdPessoas(result.getInt("qtdPessoas"));
                 reservaTemp.setDataReserva(result.getString("dataReserva"));
 
                 System.out.println("CPF DO CLIENTE = " + reservaTemp.getCpfCliente());
                 System.out.println("NUMERO DA RESERVA = " + reservaTemp.getNumReserva());
-                System.out.println("NUMERO DA MESA= " + reservaTemp.getNumMesa());
                 System.out.println("QUANTIDADE DE PESSOAS = " + reservaTemp.getQtdPessoas());
                 System.out.println("DATA DA RESERVA = " + reservaTemp.getDataReserva());
 

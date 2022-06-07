@@ -88,7 +88,6 @@ public class RestauranteMenu {
                     while(numMesa < 1 || numMesa > 10);
 
                     m.setNumMesa(numMesa);
-                    r.setNumMesa(numMesa);
                     r.setNumReserva(numMesa);
 
                     double preco = 40.8 * qtdPessoas;

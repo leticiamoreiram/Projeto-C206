@@ -4,7 +4,6 @@ public class Reserva {
 
     private int numReserva;
     private String Cliente_cpfCliente;
-    private int numMesa;
     private int qtdPessoas;
     private String dataReserva;
 
@@ -22,14 +21,6 @@ public class Reserva {
 
     public void setCpfCliente(String cpfCliente) {
         this.Cliente_cpfCliente = cpfCliente;
-    }
-
-    public int getNumMesa() {
-        return numMesa;
-    }
-
-    public void setNumMesa(int numMesa) {
-        this.numMesa = numMesa;
     }
 
     public int getQtdPessoas() {
