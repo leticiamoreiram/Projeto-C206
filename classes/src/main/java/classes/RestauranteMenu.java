@@ -25,7 +25,7 @@ public class RestauranteMenu {
             System.out.println("3- Ver minha reserva");
             System.out.println("4- Alterar data da reserva");
             System.out.println("5- Cancelar reserva");
-            System.out.println("6- Sair");
+            System.out.println("6- Finalizar");
             System.out.println("_______________________");
             System.out.println(" ");
             System.out.println("Sua opção: ");
