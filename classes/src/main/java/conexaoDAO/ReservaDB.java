@@ -167,7 +167,6 @@ public class ReservaDB extends Database {
 
 
 
-
     public boolean reservaHasMesa(int Reserva_numReserva, int Mesa_numMesa) {
 
         connect();
